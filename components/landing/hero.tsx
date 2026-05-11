@@ -1,11 +1,17 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, BrainCircuit, Orbit, ShieldCheck } from "lucide-react";
+import { ArrowRight, BrainCircuit, Orbit, ShieldCheck, UserPlus } from "lucide-react";
 import { useEffect } from "react";
-import { stats } from "@/data/platform-data";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/animations/reveal";
+
+const landingStats = [
+  { label: "DSA problems tracked", value: 500, suffix: "+" },
+  { label: "Roadmap modules", value: 14, suffix: "" },
+  { label: "XP achievements", value: 30, suffix: "+" },
+  { label: "Placement workflows", value: 12, suffix: "" },
+];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const motionValue = useMotionValue(0);
@@ -26,27 +32,40 @@ export function Hero() {
         <div className="pt-16">
           <Reveal>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/8 px-4 py-2 text-sm text-cyan-100 shadow-glow">
-              <ShieldCheck size={16} /> May 2026 to December 2026 placement mission
+              <ShieldCheck size={16} /> Multi-user AI placement command center
             </div>
           </Reveal>
           <Reveal delay={0.08}>
             <h1 className="max-w-4xl text-balance text-5xl font-black uppercase tracking-normal text-white sm:text-6xl lg:text-7xl">
-              20+ LPA AI Engineer Mission
+              Track Your Journey To Becoming An Elite AI Engineer
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              Transforming VANSHUL LALWANI into an elite AI Engineer through daily execution.
+              The Ultimate AI Engineer Journey Tracker for DSA, AI roadmaps, projects, placements, streaks, XP, achievements, notes, and leaderboard competition.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button className="px-6 py-3">
-                Enter Mission Control <ArrowRight size={18} />
-              </Button>
-              <Button variant="ghost" className="px-6 py-3">
-                View Skill Matrix
-              </Button>
+              <a href="/register">
+                <Button className="w-full px-6 py-3 sm:w-auto">
+                  Start free <UserPlus size={18} />
+                </Button>
+              </a>
+              <a href="/login">
+                <Button variant="ghost" className="w-full px-6 py-3 sm:w-auto">
+                  Login <ArrowRight size={18} />
+                </Button>
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={0.3}>
+            <div className="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+              {["DSA", "AI Roadmap", "Projects", "Placements"].map((item) => (
+                <div key={item} className="rounded-2xl border border-white/10 bg-white/[.04] px-3 py-3 text-center text-sm text-slate-300">
+                  {item}
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>
@@ -60,8 +79,8 @@ export function Hero() {
           >
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[.3em] text-cyan-200/70">AI Evolution Core</p>
-                <h2 className="mt-2 text-2xl font-black">Vanshul Readiness Engine</h2>
+                <p className="text-xs uppercase tracking-[.3em] text-cyan-200/70">SaaS Intelligence Core</p>
+                <h2 className="mt-2 text-2xl font-black">Placement Readiness Engine</h2>
               </div>
               <div className="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-300 text-slate-950 shadow-glow">
                 <BrainCircuit />
@@ -69,16 +88,8 @@ export function Hero() {
             </div>
             <div className="relative grid min-h-80 place-items-center overflow-hidden rounded-3xl border border-cyan-300/10 bg-slate-950/55">
               <div className="absolute inset-0 grid-field animate-grid opacity-35" />
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-                className="absolute h-72 w-72 rounded-full border border-cyan-300/30"
-              />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-                className="absolute h-52 w-52 rounded-full border border-violet-300/30"
-              />
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }} className="absolute h-72 w-72 rounded-full border border-cyan-300/30" />
+              <motion.div animate={{ rotate: -360 }} transition={{ duration: 28, repeat: Infinity, ease: "linear" }} className="absolute h-52 w-52 rounded-full border border-violet-300/30" />
               <motion.div
                 animate={{ scale: [1, 1.08, 1], opacity: [.72, 1, .72] }}
                 transition={{ duration: 3, repeat: Infinity }}
@@ -88,12 +99,8 @@ export function Hero() {
               </motion.div>
             </div>
           </motion.div>
-          <motion.div
-            animate={{ y: [0, -18, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-8 left-0 w-64 rounded-2xl border border-white/10 bg-white/[.05] p-4 backdrop-blur-xl"
-          >
-            <p className="text-xs text-slate-400">Placement readiness</p>
+          <motion.div animate={{ y: [0, -18, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-8 left-0 w-64 rounded-2xl border border-white/10 bg-white/[.05] p-4 backdrop-blur-xl">
+            <p className="text-xs text-slate-400">Average readiness lift</p>
             <p className="mt-1 text-3xl font-black text-cyan-100">68%</p>
             <div className="mt-3 h-2 rounded-full bg-white/10">
               <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-cyan-300 to-violet-400" />
@@ -103,20 +110,16 @@ export function Hero() {
       </div>
 
       <div className="mx-auto -mt-2 grid max-w-7xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <Reveal key={stat.label} delay={0.1 + index * 0.05}>
-              <div className="glass rounded-2xl p-5">
-                <Icon className="mb-4 text-cyan-200" />
-                <p className="text-4xl font-black">
-                  <Counter value={stat.value} suffix={stat.suffix} />
-                </p>
-                <p className="mt-1 text-sm text-slate-400">{stat.label}</p>
-              </div>
-            </Reveal>
-          );
-        })}
+        {landingStats.map((stat, index) => (
+          <Reveal key={stat.label} delay={0.1 + index * 0.05}>
+            <div className="glass rounded-2xl p-5">
+              <p className="text-4xl font-black">
+                <Counter value={stat.value} suffix={stat.suffix} />
+              </p>
+              <p className="mt-1 text-sm text-slate-400">{stat.label}</p>
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );
