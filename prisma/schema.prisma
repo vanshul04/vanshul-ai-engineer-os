@@ -53,6 +53,7 @@ model User {
   accounts       Account[]
   sessions       Session[]
   tasks          Task[]
+  dailyTaskCompletions DailyTaskCompletion[]
   dsaProgress    DsaProgress[]
   roadmap        RoadmapProgress[]
   projects       Project[]
@@ -60,6 +61,23 @@ model User {
   applications   Application[]
   notes          Note[]
   achievements   UserAchievement[]
+}
+
+model DailyTaskCompletion {
+  id          String   @id @default(cuid())
+  userId      String
+  taskKey     String
+  day         Int
+  title       String
+  category    String
+  skill       String
+  xp          Int
+  completed   Boolean  @default(true)
+  completedAt DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, taskKey])
+  @@index([userId, day])
 }
 
 model Account {

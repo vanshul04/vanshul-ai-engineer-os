@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { AmbientBackground } from "@/components/animations/ambient-background";
 import { CursorGlow } from "@/components/animations/cursor-glow";
 import { SaaSDashboard } from "@/components/dashboard/saas-dashboard";
+import { executionPlan, getCurrentExecutionDay } from "@/data/execution-plan";
 import { prisma } from "@/lib/prisma";
 
 export default async function DashboardPage() {
@@ -14,6 +15,7 @@ export default async function DashboardPage() {
       where: { id: session.user.id },
       include: {
         tasks: { orderBy: { createdAt: "desc" }, take: 20 },
+        dailyTaskCompletions: { take: 500 },
         dsaProgress: { orderBy: { solvedAt: "desc" }, take: 100 },
         roadmap: true,
         projects: { orderBy: { updatedAt: "desc" }, take: 20 },
@@ -49,6 +51,11 @@ export default async function DashboardPage() {
       college: user.college,
     },
     tasks: user.tasks.map(({ id, title, category, done, xp }) => ({ id, title, category, done, xp })),
+    execution: {
+      currentDay: getCurrentExecutionDay(),
+      plan: executionPlan,
+      completions: user.dailyTaskCompletions.map(({ taskKey, day, skill, category, xp }) => ({ taskKey, day, skill, category, xp })),
+    },
     dsa: user.dsaProgress.map(({ id, title, topic, difficulty, platform }) => ({ id, title, topic, difficulty, platform })),
     roadmap: user.roadmap.map(({ module, topic, completed, completion }) => ({ module, topic, completed, completion })),
     projects: user.projects.map(({ id, title, description, techStack, completion, status, githubUrl, deploymentUrl }) => ({
