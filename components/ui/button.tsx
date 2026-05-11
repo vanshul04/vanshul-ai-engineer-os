@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ButtonHTMLAttributes } from "react";
+import type { HTMLMotionProps } from "framer-motion";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = Omit<HTMLMotionProps<"button">, "children"> & {
+  children: ReactNode;
   variant?: "primary" | "ghost" | "panel";
 };
 
