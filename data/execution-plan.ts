@@ -24,7 +24,7 @@ export type ExecutionDay = {
 
 const months = [
   {
-    label: "May 2026",
+    label: "Month 1",
     theme: "Python + Logic Building",
     target: ["Install tooling", "Master Python basics", "Build daily coding habit", "Finish 80 beginner problems"],
     skills: ["Python", "GitHub", "Aptitude"],
@@ -34,7 +34,7 @@ const months = [
     aptitude: ["percentages", "ratios", "averages", "number systems"],
   },
   {
-    label: "June 2026",
+    label: "Month 2",
     theme: "DSA Basics",
     target: ["Complete arrays and strings", "Solve 150 cumulative DSA", "Understand time complexity", "Weekly contests"],
     skills: ["DSA", "Python", "Aptitude"],
@@ -44,7 +44,7 @@ const months = [
     aptitude: ["time and work", "profit and loss", "speed distance time", "probability"],
   },
   {
-    label: "July 2026",
+    label: "Month 3",
     theme: "SQL + Web Development",
     target: ["SQL basics complete", "React dashboard shipped", "FastAPI basics", "220 cumulative DSA"],
     skills: ["SQL", "React", "FastAPI"],
@@ -54,7 +54,7 @@ const months = [
     aptitude: ["logical reasoning", "puzzles", "clocks", "calendars"],
   },
   {
-    label: "August 2026",
+    label: "Month 4",
     theme: "Machine Learning",
     target: ["ML fundamentals", "EDA project", "model evaluation", "300 cumulative DSA"],
     skills: ["Machine Learning", "Python", "System Design"],
@@ -64,7 +64,7 @@ const months = [
     aptitude: ["data interpretation", "permutations", "combinations", "probability"],
   },
   {
-    label: "September 2026",
+    label: "Month 5",
     theme: "Deep Learning + GenAI",
     target: ["Neural network basics", "LLM fundamentals", "first GenAI app", "380 cumulative DSA"],
     skills: ["Deep Learning", "Generative AI", "LangChain"],
@@ -74,7 +74,7 @@ const months = [
     aptitude: ["mixed aptitude set", "reasoning speed", "verbal basics", "quant revision"],
   },
   {
-    label: "October 2026",
+    label: "Month 6",
     theme: "RAG + AI Agents",
     target: ["RAG PDF assistant", "agent workflows", "Docker deploy", "450 cumulative DSA"],
     skills: ["RAG", "AI Agents", "Docker"],
@@ -84,7 +84,7 @@ const months = [
     aptitude: ["OA mixed mocks", "puzzles", "probability", "time pressure sets"],
   },
   {
-    label: "November 2026",
+    label: "Month 7",
     theme: "System Design + Placement Sprint",
     target: ["AI system design", "resume final", "mock interviews", "applications pipeline"],
     skills: ["System Design", "AWS", "Interview"],
@@ -94,7 +94,7 @@ const months = [
     aptitude: ["full-length aptitude tests", "HR prep", "communication practice", "company OA sets"],
   },
   {
-    label: "December 2026",
+    label: "Month 8",
     theme: "Interview Conversion",
     target: ["Final revision", "portfolio polish", "mock interviews", "offer readiness"],
     skills: ["Interview", "System Design", "GitHub"],
@@ -143,7 +143,7 @@ export function buildExecutionPlan(): ExecutionDay[] {
         monthIndex,
         month: month.label,
         theme: month.theme,
-        dateLabel: `${month.label.split(" ")[0]} ${dayInMonth}`,
+        dateLabel: `Day ${dayInMonth} of ${month.label}`,
         title: `Day ${day} - ${month.theme}`,
         weeklyTarget: [
           `Week ${week}: complete ${pick(month.lessons, week)} and ${pick(month.dsa, week)} practice`,
@@ -184,8 +184,8 @@ export const projectExecutionTracks = [
   { name: "AI Agent System", steps: ["Define tools", "Build planner", "Add memory", "Create executor", "Add logs", "Deploy worker"] },
 ];
 
-export function getCurrentExecutionDay(start = new Date("2026-05-01T00:00:00.000Z")) {
-  const now = new Date();
-  const diff = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate())) / 86400000) + 1;
-  return Math.min(Math.max(diff, 1), executionPlan.length);
+export function getNextExecutionDay(completedTaskKeys: string[]) {
+  const completed = new Set(completedTaskKeys);
+  const nextDay = executionPlan.find((day) => day.tasks.some((task) => !completed.has(task.key)));
+  return nextDay?.day ?? executionPlan.length;
 }

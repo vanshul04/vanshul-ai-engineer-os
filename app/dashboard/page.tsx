@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import { AmbientBackground } from "@/components/animations/ambient-background";
 import { CursorGlow } from "@/components/animations/cursor-glow";
 import { SaaSDashboard } from "@/components/dashboard/saas-dashboard";
-import { executionPlan, getCurrentExecutionDay } from "@/data/execution-plan";
+import { executionPlan, getNextExecutionDay } from "@/data/execution-plan";
 import { prisma } from "@/lib/prisma";
 
 export default async function DashboardPage() {
@@ -39,6 +39,8 @@ export default async function DashboardPage() {
 
   if (!user) redirect("/login");
 
+  const completionKeys = user.dailyTaskCompletions.map(({ taskKey }) => taskKey);
+
   const data = {
     user: {
       name: user.name,
@@ -52,7 +54,7 @@ export default async function DashboardPage() {
     },
     tasks: user.tasks.map(({ id, title, category, done, xp }) => ({ id, title, category, done, xp })),
     execution: {
-      currentDay: getCurrentExecutionDay(),
+      currentDay: getNextExecutionDay(completionKeys),
       plan: executionPlan,
       completions: user.dailyTaskCompletions.map(({ taskKey, day, skill, category, xp }) => ({ taskKey, day, skill, category, xp })),
     },

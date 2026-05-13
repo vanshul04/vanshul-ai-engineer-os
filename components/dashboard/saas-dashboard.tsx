@@ -73,6 +73,8 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
   const completionKeys = useMemo(() => new Set(data.execution.completions.map((item) => item.taskKey)), [data.execution.completions]);
   const today = data.execution.plan.find((day) => day.day === selectedDay) ?? data.execution.plan[0];
   const currentMonth = data.execution.plan.filter((day) => day.month === today.month);
+  const previousDay = Math.max(1, selectedDay - 1);
+  const nextDay = Math.min(data.execution.plan.length, selectedDay + 1);
   const completedToday = today.tasks.filter((task) => completionKeys.has(task.key)).length;
   const todayPercent = completionPercent(completedToday, today.tasks.length);
   const completedAll = data.execution.completions.length;
@@ -169,9 +171,9 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
 
       <header className="mb-6 flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/35 p-4 backdrop-blur-2xl md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-sm uppercase tracking-[.28em] text-cyan-200/70">Duolingo for AI Engineer placements</p>
+          <p className="text-sm uppercase tracking-[.28em] text-cyan-200/70">Structured Day 1 to Day {data.execution.plan.length} placement journey</p>
           <h1 className="mt-2 text-3xl font-black sm:text-4xl">AI Placement Tracker</h1>
-          <p className="mt-1 text-slate-400">{data.user.name ?? "Student"} - {data.user.targetRole} - {data.user.targetPackage ?? "Target package not set"}</p>
+          <p className="mt-1 text-slate-400">{data.user.name ?? "Student"} - starts at Day 1, continues by checkbox completion</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Button variant="ghost"><Bell size={16} /> Daily reminder</Button>
@@ -202,14 +204,14 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
 
       <section className="mt-5 grid gap-5 xl:grid-cols-[1.35fr_.65fr]">
         <Panel
-          title={`Today's Mission - ${today.title}`}
+          title={`Mission ${today.day} - ${today.theme}`}
           icon={CalendarCheck}
           action={<span className="rounded-full bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100">{completedToday}/{today.tasks.length} complete</span>}
         >
           <div className="mb-5 grid gap-3 md:grid-cols-3">
             <div className="rounded-2xl border border-white/10 bg-white/[.04] p-4 md:col-span-2">
-              <p className="text-sm text-cyan-100/70">{today.dateLabel} - {today.month}</p>
-              <h3 className="mt-1 text-2xl font-black">{today.theme}</h3>
+              <p className="text-sm text-cyan-100/70">{today.month} - {today.dateLabel}</p>
+              <h3 className="mt-1 text-2xl font-black">Day {today.day}: {today.theme}</h3>
               <Progress value={todayPercent} className="mt-4" />
             </div>
             <div className="rounded-2xl border border-violet-300/20 bg-violet-400/10 p-4">
@@ -260,12 +262,30 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-2">
-              {[data.execution.currentDay - 1, data.execution.currentDay, data.execution.currentDay + 1].filter((day) => day > 0 && day <= data.execution.plan.length).map((day) => (
-                <button key={day} onClick={() => setSelectedDay(day)} className={`rounded-xl border px-3 py-2 text-sm ${selectedDay === day ? "border-cyan-300 bg-cyan-300/15 text-cyan-100" : "border-white/10 bg-white/[.03] text-slate-400"}`}>
-                  Day {day}
-                </button>
-              ))}
+              <button onClick={() => setSelectedDay(previousDay)} className="rounded-xl border border-white/10 bg-white/[.03] px-3 py-2 text-sm text-slate-300">
+                Previous
+              </button>
+              <button onClick={() => setSelectedDay(data.execution.currentDay)} className="rounded-xl border border-cyan-300 bg-cyan-300/15 px-3 py-2 text-sm font-bold text-cyan-100">
+                Next Day {data.execution.currentDay}
+              </button>
+              <button onClick={() => setSelectedDay(nextDay)} className="rounded-xl border border-white/10 bg-white/[.03] px-3 py-2 text-sm text-slate-300">
+                Next
+              </button>
             </div>
+            <select
+              value={selectedDay}
+              onChange={(event) => setSelectedDay(Number(event.target.value))}
+              className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950 px-3 py-2 text-sm text-slate-200"
+            >
+              {data.execution.plan.map((day) => (
+                <option key={day.day} value={day.day}>
+                  Day {day.day} - {day.theme}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-slate-500">
+              New users begin at Day 1. The highlighted button returns to the first unfinished day.
+            </p>
           </div>
         </Panel>
       </section>
