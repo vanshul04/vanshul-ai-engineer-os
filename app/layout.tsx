@@ -6,8 +6,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AI Placement Tracker",
-  description: "The Ultimate AI Engineer Journey Tracker for DSA, AI roadmap, projects, placements, XP, and achievements.",
+  title: "PlacePilot",
+  description: "Your AI Engineer Journey, Guided Daily.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -20,7 +20,7 @@ export function TopCommand() {
       </div>
       <div className="flex flex-1 items-center gap-2 md:flex-none">
         <Button variant="ghost" className="flex-1 md:flex-none">
-          <Sparkles size={16} /> AI Plan
+          <Sparkles size={16} /> PlacePilot AI
         </Button>
         <Button className="flex-1 md:flex-none">
           <Zap size={16} /> Execute

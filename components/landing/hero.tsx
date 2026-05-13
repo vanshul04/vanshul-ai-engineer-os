@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, CalendarCheck, CheckCircle2, Code2, GraduationCap, ShieldCheck, UserPlus } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { PlacePilotAIChat } from "@/components/ai/placepilot-ai-chat";
 import { Reveal } from "@/components/animations/reveal";
 
 const landingStats = [
@@ -42,7 +43,7 @@ export function Hero() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              The Ultimate AI Engineer Journey Tracker for DSA, AI roadmaps, projects, placements, streaks, XP, achievements, notes, and leaderboard competition.
+              PlacePilot guides your AI engineer journey daily with DSA, AI roadmaps, projects, placements, streaks, XP, achievements, notes, and PlacePilot AI.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
@@ -57,6 +58,7 @@ export function Hero() {
                   Login <ArrowRight size={18} />
                 </Button>
               </a>
+              <PlacePilotAIChat />
             </div>
           </Reveal>
           <Reveal delay={0.3}>

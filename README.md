@@ -1,8 +1,8 @@
-# AI Placement Tracker
+# PlacePilot
 
-**The Ultimate AI Engineer Journey Tracker**
+**Your AI Engineer Journey, Guided Daily.**
 
-A production-ready Next.js SaaS foundation where students can register, log in, track DSA, AI roadmap progress, projects, placements, notes, XP, achievements, and leaderboard standing.
+A production-ready Next.js SaaS foundation where students can register, log in, track DSA, AI roadmap progress, projects, placements, notes, XP, achievements, leaderboard standing, and get guidance from PlacePilot AI.
 
 ## Stack
 
@@ -11,6 +11,7 @@ A production-ready Next.js SaaS foundation where students can register, log in, 
 - Prisma ORM with PostgreSQL
 - Auth.js / NextAuth credentials auth
 - Recharts analytics
+- Google Gemini powered PlacePilot AI assistant
 - Zustand-ready client state architecture
 
 ## Local Setup
@@ -60,6 +61,7 @@ DATABASE_URL=your_postgres_url
 AUTH_SECRET=your_generated_secret
 AUTH_URL=https://your-domain.vercel.app
 NEXTAUTH_URL=https://your-domain.vercel.app
+GEMINI_API_KEY=your_gemini_key
 ```
 
 5. Set build command:
@@ -89,4 +91,5 @@ npm run db:seed
 - Notes system
 - Global leaderboard
 - Achievement catalog
+- PlacePilot AI chat assistant for DSA, AI/ML, projects, placement prep, motivation, and daily recommendations
 - Futuristic landing page and dashboard UI

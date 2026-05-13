@@ -30,7 +30,7 @@ export function AboutSection() {
                 </p>
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   {[
-                    { icon: GraduationCap, label: "B.Tech CSE", value: "AI & ML" },
+                    { icon: GraduationCap, label: "BTech", value: "CSE - ED TECH" },
                     { icon: BrainCircuit, label: "Goal", value: "AI Engineer" },
                     { icon: Rocket, label: "Mode", value: "Execution" },
                   ].map((item) => {

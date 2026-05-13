@@ -1,5 +1,5 @@
 {
-  "name": "ai-placement-tracker",
+  "name": "placepilot",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
+    "@google/generative-ai": "^0.24.1",
     "@react-three/fiber": "^9.0.0",
     "@react-three/drei": "^10.0.0",
     "@radix-ui/react-progress": "^1.1.7",

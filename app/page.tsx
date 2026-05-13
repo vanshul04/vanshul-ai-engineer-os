@@ -2,7 +2,7 @@ import { AmbientBackground } from "@/components/animations/ambient-background";
 import { CursorGlow } from "@/components/animations/cursor-glow";
 import { AboutSection } from "@/components/landing/about-section";
 import { Hero } from "@/components/landing/hero";
-import { FeatureSections, SiteNav } from "@/components/landing/site-nav";
+import { FeatureSections, SiteFooter, SiteNav } from "@/components/landing/site-nav";
 
 export default function Home() {
   return (
@@ -14,6 +14,7 @@ export default function Home() {
         <Hero />
         <FeatureSections />
         <AboutSection />
+        <SiteFooter />
       </div>
     </main>
   );

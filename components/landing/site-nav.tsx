@@ -1,6 +1,7 @@
 "use client";
 
 import { BarChart3, CheckCircle2, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
+import { PlacePilotAIChat } from "@/components/ai/placepilot-ai-chat";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -11,6 +12,7 @@ const links = [
 
 export function SiteNav() {
   return (
+    <>
     <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-[#06070b]/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="/" className="flex items-center gap-3">
@@ -18,8 +20,8 @@ export function SiteNav() {
             <CheckCircle2 size={18} />
           </div>
           <div>
-            <p className="text-sm font-black leading-none text-white">AI Placement Tracker</p>
-            <p className="hidden text-xs text-slate-500 sm:block">Daily execution system</p>
+            <p className="text-sm font-black leading-none text-white">PlacePilot</p>
+            <p className="hidden text-xs text-slate-500 sm:block">Your AI Engineer Journey, Guided Daily.</p>
           </div>
         </a>
         <nav className="hidden items-center gap-6 md:flex">
@@ -30,6 +32,9 @@ export function SiteNav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <div className="hidden md:block">
+            <PlacePilotAIChat compact />
+          </div>
           <a href="/login" className="hidden sm:block">
             <Button variant="ghost" className="px-3 py-2">
               <LogIn size={15} /> Login
@@ -48,6 +53,19 @@ export function SiteNav() {
         </div>
       </div>
     </header>
+    <nav className="fixed bottom-3 left-3 right-3 z-40 flex items-center justify-around rounded-2xl border border-white/10 bg-[#080a12]/90 p-2 backdrop-blur-xl md:hidden">
+      {[
+        { href: "#features", label: "Features" },
+        { href: "#workflow", label: "Workflow" },
+        { href: "#about", label: "About" },
+        { href: "/dashboard", label: "App" },
+      ].map((item) => (
+        <a key={item.href} href={item.href} className="rounded-xl px-3 py-2 text-xs font-semibold text-slate-400 hover:bg-white/[.06] hover:text-white">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    </>
   );
 }
 
@@ -67,7 +85,7 @@ export function FeatureSections() {
             <h2 className="mt-2 text-3xl font-black text-white">Useful first. Beautiful second.</h2>
           </div>
           <a href="/register">
-            <Button variant="ghost">Create tracker</Button>
+            <Button variant="ghost">Create PlacePilot tracker</Button>
           </a>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
@@ -84,5 +102,24 @@ export function FeatureSections() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function SiteFooter() {
+  return (
+    <footer className="relative border-t border-white/10 px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="font-black text-white">PlacePilot</p>
+          <p>Your AI Engineer Journey, Guided Daily.</p>
+        </div>
+        <div className="flex flex-wrap gap-4">
+          <a href="#features" className="hover:text-white">Features</a>
+          <a href="#workflow" className="hover:text-white">Workflow</a>
+          <a href="#about" className="hover:text-white">About</a>
+          <a href="/login" className="hover:text-white">Login</a>
+        </div>
+      </div>
+    </footer>
   );
 }

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { PlacePilotAIChat } from "@/components/ai/placepilot-ai-chat";
 import { Progress } from "@/components/ui/progress";
 import { DifficultyChart, SkillRadar, WeeklyConsistencyChart } from "@/components/charts/performance-charts";
 import { dailyCategories, dsaTopics, roadmapModules } from "@/data/saas-data";
@@ -172,12 +173,12 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
       <header className="mb-6 flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/35 p-4 backdrop-blur-2xl md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-sm uppercase tracking-[.28em] text-cyan-200/70">Structured Day 1 to Day {data.execution.plan.length} placement journey</p>
-          <h1 className="mt-2 text-3xl font-black sm:text-4xl">AI Placement Tracker</h1>
+          <h1 className="mt-2 text-3xl font-black sm:text-4xl">PlacePilot</h1>
           <p className="mt-1 text-slate-400">{data.user.name ?? "Student"} - starts at Day 1, continues by checkbox completion</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Button variant="ghost"><Bell size={16} /> Daily reminder</Button>
-          <Button variant="ghost"><Sparkles size={16} /> AI Mentor</Button>
+          <PlacePilotAIChat compact />
           <a href="/logout"><Button><LogOut size={16} /> Logout</Button></a>
         </div>
       </header>

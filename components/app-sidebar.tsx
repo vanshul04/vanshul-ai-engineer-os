@@ -22,8 +22,8 @@ export function AppSidebar() {
           </div>
           {sidebarOpen && (
             <div>
-              <p className="text-sm font-black tracking-wide">Vanshul OS</p>
-              <p className="text-xs text-cyan-100/60">AI Mission Core</p>
+              <p className="text-sm font-black tracking-wide">PlacePilot</p>
+              <p className="text-xs text-cyan-100/60">Guided Daily</p>
             </div>
           )}
         </div>

@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { BrainCircuit, Loader2 } from "lucide-react";
+import { PlacePilotAIChat } from "@/components/ai/placepilot-ai-chat";
 import { Button } from "@/components/ui/button";
 
 export function AuthCard({ mode }: { mode: "login" | "register" }) {
@@ -61,8 +62,9 @@ export function AuthCard({ mode }: { mode: "login" | "register" }) {
           <BrainCircuit />
         </div>
         <div>
-          <p className="text-sm uppercase tracking-[.28em] text-cyan-200/70">AI Placement Tracker</p>
+          <p className="text-sm uppercase tracking-[.28em] text-cyan-200/70">PlacePilot</p>
           <h1 className="text-3xl font-black">{mode === "login" ? "Welcome back" : "Create your command center"}</h1>
+          <p className="mt-1 text-sm text-slate-500">Your AI Engineer Journey, Guided Daily.</p>
         </div>
       </div>
 
@@ -98,6 +100,9 @@ export function AuthCard({ mode }: { mode: "login" | "register" }) {
           {mode === "login" ? "Create an account" : "Login"}
         </a>
       </p>
+      <div className="mt-4 flex justify-center">
+        <PlacePilotAIChat compact />
+      </div>
     </form>
   );
 }
