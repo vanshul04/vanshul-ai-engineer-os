@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, BrainCircuit, Orbit, ShieldCheck, UserPlus } from "lucide-react";
+import { ArrowRight, CalendarCheck, CheckCircle2, Code2, GraduationCap, ShieldCheck, UserPlus } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/animations/reveal";
@@ -27,7 +27,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export function Hero() {
   return (
-    <section className="relative min-h-[92vh] overflow-hidden px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+    <section className="relative min-h-[92vh] overflow-hidden px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.04fr_.96fr]">
         <div className="pt-16">
           <Reveal>
@@ -36,8 +36,8 @@ export function Hero() {
             </div>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="max-w-4xl text-balance text-5xl font-black uppercase tracking-normal text-white sm:text-6xl lg:text-7xl">
-              Track Your Journey To Becoming An Elite AI Engineer
+            <h1 className="max-w-4xl text-balance text-5xl font-black tracking-normal text-white sm:text-6xl lg:text-7xl">
+              Track your journey to becoming an elite AI engineer
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
@@ -70,42 +70,61 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <div className="perspective relative min-h-[560px]">
+        <div id="workflow" className="perspective relative min-h-[560px]">
           <motion.div
-            initial={{ opacity: 0, rotateX: 18, rotateY: -18, y: 40 }}
-            animate={{ opacity: 1, rotateX: 0, rotateY: 0, y: 0 }}
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-8 rounded-[2rem] border border-white/10 bg-black/30 p-5 shadow-2xl backdrop-blur-2xl"
+            className="absolute inset-x-0 top-8 rounded-3xl border border-white/10 bg-black/35 p-5 shadow-2xl backdrop-blur-2xl"
           >
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[.3em] text-cyan-200/70">SaaS Intelligence Core</p>
-                <h2 className="mt-2 text-2xl font-black">Placement Readiness Engine</h2>
+                <p className="text-xs uppercase tracking-[.3em] text-cyan-200/70">Dashboard preview</p>
+                <h2 className="mt-2 text-2xl font-black">Today’s execution plan</h2>
               </div>
-              <div className="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-300 text-slate-950 shadow-glow">
-                <BrainCircuit />
+              <div className="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-300/12 text-cyan-100">
+                <CalendarCheck />
               </div>
             </div>
-            <div className="relative grid min-h-80 place-items-center overflow-hidden rounded-3xl border border-cyan-300/10 bg-slate-950/55">
-              <div className="absolute inset-0 grid-field animate-grid opacity-35" />
-              <motion.div animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }} className="absolute h-72 w-72 rounded-full border border-cyan-300/30" />
-              <motion.div animate={{ rotate: -360 }} transition={{ duration: 28, repeat: Infinity, ease: "linear" }} className="absolute h-52 w-52 rounded-full border border-violet-300/30" />
-              <motion.div
-                animate={{ scale: [1, 1.08, 1], opacity: [.72, 1, .72] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="relative grid h-36 w-36 place-items-center rounded-full bg-cyan-300/15 shadow-[0_0_80px_rgba(103,232,249,.35)]"
-              >
-                <Orbit className="h-16 w-16 text-cyan-200" />
-              </motion.div>
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/55 p-4">
+              <div className="mb-4 grid grid-cols-3 gap-3">
+                {[
+                  ["Day 1", "Python + Logic"],
+                  ["45 min", "Learning"],
+                  ["325 XP", "Available"],
+                ].map(([value, label]) => (
+                  <div key={label} className="rounded-2xl border border-white/10 bg-white/[.035] p-3">
+                    <p className="text-lg font-black text-white">{value}</p>
+                    <p className="text-xs text-slate-500">{label}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-2">
+                {[
+                  { label: "Learn Python variables", icon: GraduationCap },
+                  { label: "Solve 5 beginner problems", icon: Code2 },
+                  { label: "Practice percentage aptitude", icon: CheckCircle2 },
+                  { label: "Update notes with mistakes", icon: CheckCircle2 },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                  <div key={item.label} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.04] px-4 py-3">
+                    <span className="grid h-7 w-7 place-items-center rounded-lg border border-cyan-300/30 bg-cyan-300/10 text-cyan-100">
+                      <Icon size={16} />
+                    </span>
+                    <p className="text-sm font-semibold text-slate-200">{item.label}</p>
+                  </div>
+                )})}
+              </div>
             </div>
           </motion.div>
-          <motion.div animate={{ y: [0, -18, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-8 left-0 w-64 rounded-2xl border border-white/10 bg-white/[.05] p-4 backdrop-blur-xl">
-            <p className="text-xs text-slate-400">Average readiness lift</p>
-            <p className="mt-1 text-3xl font-black text-cyan-100">68%</p>
+          <div className="absolute bottom-8 left-0 w-64 rounded-2xl border border-white/10 bg-white/[.05] p-4 backdrop-blur-xl">
+            <p className="text-xs text-slate-400">8-month journey</p>
+            <p className="mt-1 text-3xl font-black text-cyan-100">Day 1 → 245</p>
             <div className="mt-3 h-2 rounded-full bg-white/10">
-              <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-cyan-300 to-violet-400" />
+              <div className="h-full w-[18%] rounded-full bg-gradient-to-r from-cyan-300 to-violet-400" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

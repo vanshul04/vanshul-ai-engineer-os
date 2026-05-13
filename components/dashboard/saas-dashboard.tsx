@@ -182,6 +182,26 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
         </div>
       </header>
 
+      <nav className="sticky top-3 z-30 mb-5 overflow-x-auto rounded-2xl border border-white/10 bg-black/45 p-2 backdrop-blur-xl scrollbar-hide">
+        <div className="flex min-w-max gap-2">
+          {[
+            { href: "#mission", label: "Mission", icon: CalendarCheck },
+            { href: "#skills", label: "Skills", icon: GraduationCap },
+            { href: "#dsa", label: "DSA", icon: Code2 },
+            { href: "#projects", label: "Projects", icon: Rocket },
+            { href: "#prep", label: "Prep", icon: BriefcaseBusiness },
+            { href: "#analytics", label: "Analytics", icon: LayoutDashboard },
+            { href: "#notes", label: "Notes", icon: BookOpen },
+          ].map((item) => {
+            const Icon = item.icon;
+            return (
+            <a key={item.href} href={item.href} className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-400 transition hover:bg-white/[.06] hover:text-white">
+              <Icon size={15} /> {item.label}
+            </a>
+          )})}
+        </div>
+      </nav>
+
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {[
           { label: "Today's mission", value: todayPercent, suffix: "%", icon: Zap, progress: todayPercent },
@@ -202,7 +222,7 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
         })}
       </section>
 
-      <section className="mt-5 grid gap-5 xl:grid-cols-[1.35fr_.65fr]">
+      <section id="mission" className="mt-5 scroll-mt-24 grid gap-5 xl:grid-cols-[1.35fr_.65fr]">
         <Panel
           title={`Mission ${today.day} - ${today.theme}`}
           icon={CalendarCheck}
@@ -290,7 +310,7 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
         </Panel>
       </section>
 
-      <section className="mt-5 grid gap-5 xl:grid-cols-3">
+      <section id="skills" className="mt-5 scroll-mt-24 grid gap-5 xl:grid-cols-3">
         <Panel title="Skill Mastery Engine" icon={GraduationCap}>
           <div className="max-h-[420px] space-y-3 overflow-auto pr-1 scrollbar-hide">
             {skillRows.map((skill) => (
@@ -308,6 +328,7 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
           </div>
         </Panel>
 
+        <div id="dsa" className="scroll-mt-24">
         <Panel title="DSA Topic System" icon={Code2}>
           <div className="max-h-[420px] space-y-3 overflow-auto pr-1 scrollbar-hide">
             {dsaExecutionTopics.map((topic) => {
@@ -328,14 +349,17 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
             })}
           </div>
         </Panel>
+        </div>
 
+        <div id="analytics" className="scroll-mt-24">
         <Panel title="Analytics Center" icon={LayoutDashboard}>
           <WeeklyConsistencyChart data={weekly} />
           <SkillRadar data={radar} />
         </Panel>
+        </div>
       </section>
 
-      <section className="mt-5 grid gap-5 xl:grid-cols-[1fr_1fr]">
+      <section id="projects" className="mt-5 scroll-mt-24 grid gap-5 xl:grid-cols-[1fr_1fr]">
         <Panel title="Project Execution Tracks" icon={Rocket}>
           <div className="grid gap-4 md:grid-cols-3">
             {projectExecutionTracks.map((project) => (
@@ -372,7 +396,7 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
               <select name="difficulty" className="w-full rounded-xl border border-white/10 bg-slate-950 px-3 py-2 text-sm"><option>EASY</option><option>MEDIUM</option><option>HARD</option></select>
               <Button className="w-full"><Code2 size={16} /> Save</Button>
             </form>
-            <form onSubmit={(event) => handleSubmit(event, "/api/notes")} className="space-y-2 rounded-2xl border border-white/10 bg-white/[.03] p-4">
+            <form id="notes" onSubmit={(event) => handleSubmit(event, "/api/notes")} className="scroll-mt-24 space-y-2 rounded-2xl border border-white/10 bg-white/[.03] p-4">
               <h3 className="font-black">Notes</h3>
               <Field name="title" placeholder="Interview note" />
               <Field name="folder" placeholder="Folder" />
@@ -383,7 +407,7 @@ export function SaaSDashboard({ data }: { data: DashboardData }) {
         </Panel>
       </section>
 
-      <section className="mt-5 grid gap-5 xl:grid-cols-3">
+      <section id="prep" className="mt-5 scroll-mt-24 grid gap-5 xl:grid-cols-3">
         <Panel title="Aptitude + Interview Prep" icon={BriefcaseBusiness}>
           {["Percentages", "Probability", "Time/work", "Puzzles", "Logical reasoning", "DBMS", "OS", "CN", "OOP", "HR questions", "Mock interviews"].map((item, index) => (
             <div key={item} className="mb-3 rounded-2xl border border-white/10 bg-white/[.03] p-3">

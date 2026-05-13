@@ -1,14 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function CursorGlow() {
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const frame = useRef<number | null>(null);
+  const latest = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const onMove = (event: MouseEvent) => setPos({ x: event.clientX, y: event.clientY });
+    const onMove = (event: MouseEvent) => {
+      latest.current = { x: event.clientX, y: event.clientY };
+      if (frame.current) return;
+      frame.current = requestAnimationFrame(() => {
+        setPos(latest.current);
+        frame.current = null;
+      });
+    };
     window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (frame.current) cancelAnimationFrame(frame.current);
+    };
   }, []);
 
   return (
