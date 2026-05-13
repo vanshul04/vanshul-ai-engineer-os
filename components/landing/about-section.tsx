@@ -22,11 +22,11 @@ export function AboutSection() {
             <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
               <div>
                 <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/8 px-4 py-2 text-sm text-cyan-100">
-                  <Sparkles size={16} /> Project created by VANSHUL LALWANI
+                  <Sparkles size={16} /> Project created by Vanshul Lalwani
                 </div>
                 <h2 className="text-3xl font-black text-white sm:text-4xl">About Me</h2>
                 <p className="mt-4 text-slate-300">
-                  Hi, I’m VANSHUL LALWANI, a 3rd-year B.Tech Computer Science student specializing in Artificial Intelligence and Machine Learning at VIT Bhopal University.
+                  Hi, I’m Vanshul Lalwani, a 3rd-year B.Tech Computer Science student in CSE - Education Technology at VIT Bhopal University.
                 </p>
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   {[
